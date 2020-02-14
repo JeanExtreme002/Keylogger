@@ -1,6 +1,6 @@
 # Keylogger
 
-Keylogger for Windows created in Python. This application not only captures the keys like any other Keylogger, but also has the functionality to execute commands on the target computer and more.
+Keylogger created in Python. This application not only captures the keys like any other Keylogger, but also has the functionality to execute commands on the target computer and more.
 
 # Getting Started:
 
@@ -11,14 +11,14 @@ Keylogger for Windows created in Python. This application not only captures the 
 
 To install the dependencies, type the command: `pip install -r requirements.txt`
 
-After that, start the server at `server/server.py` (it is already configured to run on Heroku).
+After that, start the server at `server/server.py` ( it is already configured to run on Heroku ).
 
 # Setting and running keylogger:
 
-Open the `app/config /config.json` file and enter the server URL in the **host** key. See the example below:
+Open the `app/config/config.json` file and enter the server URL in the **host** key. See the example below:
 ```
 {
-    "host": "https://keylogger-app-37456.herokuapp.com/"
+    "host": "https://keylogger-app-37456.herokuapp.com"
 }
 ```
 
