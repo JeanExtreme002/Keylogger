@@ -1,0 +1,7 @@
+Flask
+Pillow
+keyboard
+psutil
+pyautogui
+pyperclip
+requests
