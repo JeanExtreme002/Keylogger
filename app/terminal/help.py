@@ -22,6 +22,8 @@ info = """ COMMANDS:
 
  SELECT [username]: Select a user.
 
+ SEND [filename]: Send a file.
+
  STOP: Stop sending keys.
 
  USER: Show selected user.

