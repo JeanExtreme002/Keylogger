@@ -1,6 +1,7 @@
 # Keylogger
 
-Keylogger created in Python. This application not only captures the keys like any other Keylogger, but also has the functionality to execute commands on the target computer and more.
+Keylogger created in Python. This application not only captures the keys like any other Keylogger, but also has the 
+functionality to execute commands on the target computer and more.
 
 # Getting Started:
 
@@ -11,7 +12,8 @@ Keylogger created in Python. This application not only captures the keys like an
 
 To install the dependencies, type the command: `pip install -r requirements.txt`
 
-After that, start the server at `server/server.py` ( it is already configured to run on Heroku ).
+After that, start the server at `server/flask/server.py` or `server/express/server.js` ( both are configured 
+to run on Heroku ).
 
 # Setting and running keylogger:
 
