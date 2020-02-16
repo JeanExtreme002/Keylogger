@@ -5,15 +5,10 @@ const router = require("./controller/routes");
 
 const app = express();
 
-// Define configurações
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json({limit: "1024mb"}));
 
-// Define as rotas
 app.use(router);
-
-
-// Executa o servidor
 
 const PORT = process.env.PORT || 5000;
 
