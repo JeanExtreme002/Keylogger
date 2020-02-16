@@ -12,8 +12,8 @@ functionality to execute commands on the target computer and more.
 
 To install the dependencies, type the command: `pip install -r requirements.txt`
 
-After that, start the server at `server/flask/server.py` or `server/express/server.js` ( both are configured 
-to run on Heroku ).
+After that, start the server at `server/flask/server.py` or `server/express/server.js`. Both applications are already 
+configured to run on [Heroku](https://heroku.com).
 
 # Setting and running keylogger:
 
